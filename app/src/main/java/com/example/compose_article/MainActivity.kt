@@ -5,8 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -93,7 +96,76 @@ fun TaskManager(
     }
 }
 
+@Composable
+fun composeQuadrant() {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Row(modifier = Modifier.weight(1f)) {
+            ComposableInfoCard(
+                title = stringResource(R.string.text_composable),
+                color = Color(0xFFEADDFF),
+                description = stringResource(R.string.displays_text_and_follows_the_recommended_material_design_guidelines),
+                modifier = Modifier.weight(1f)
+            )
+            ComposableInfoCard(
+                title = stringResource(R.string.image_composable),
+                color = Color(0xFFD0BCFF),
+                description = stringResource(R.string.image_text),
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        Row(modifier = Modifier.weight(1f)) {
+            ComposableInfoCard(
+                title = stringResource(R.string.row_composable),
+                color = Color(0xFFD0BCFF),
+                description = stringResource(R.string.row_text),
+                modifier = Modifier.weight(1f)
+            )
+
+            ComposableInfoCard(
+                title = stringResource(R.string.column_composable),
+                color = Color(0xFFEADDFF),
+                description = stringResource(R.string.colum_text),
+                modifier = Modifier.weight(1f)
+            )
+        }
+    }
+}
+
+@Composable
+fun ComposableInfoCard(
+    title: String,
+    color: Color,
+    description: String,
+    modifier: Modifier
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(color)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = title,
+            modifier = Modifier.padding(bottom = 16.dp),
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = description,
+            textAlign = TextAlign.Justify
+        )
+    }
+}
+
 @Preview
+@Composable
+fun composeQuadrantPreview() {
+    composeQuadrant()
+}
+
+/*@Preview
 @Composable
 fun TaskManagerPreview() {
     Compose_articleTheme {
@@ -102,7 +174,7 @@ fun TaskManagerPreview() {
             secondText = stringResource(R.string.nice_work),
             modifier = Modifier)
     }
-}
+}*/
 
 
 /*@Preview(showBackground = true)
